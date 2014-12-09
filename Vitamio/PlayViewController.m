@@ -9,7 +9,6 @@
 #import "PlayViewController.h"
 #import "VideoTool.h"
 #import "ChannelModel.h"
-#import "UIView+RQ.h"
 #import "Vitamio.h"
 
 
@@ -29,9 +28,7 @@
 @property (nonatomic,strong)  NSTimer *stateTimer;
 @property (nonatomic,strong) ChannelModel *playingVideo;
 
-
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator; // 加载指示器
-
 
 @end
 
@@ -50,52 +47,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:
                               UIActivityIndicatorViewStyleWhiteLarge];
     [self.activityView addSubview:self.activityIndicator];
     [self.activityIndicator startAnimating];
     
-    
     [self playVideo];
     
     [self addTimer];
-    
-    [self addStateTimer];
 }
 
-
-#pragma mark - 播放状态监听器
-- (void)addStateTimer
-{
-    self.stateTimer = [NSTimer timerWithTimeInterval:0.5f target:self selector:@selector(monitorPlayStates) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:self.stateTimer forMode:NSRunLoopCommonModes];
-}
-
-- (void)monitorPlayStates
-{
-    if ([self.mediaPlayer isPlaying]) {
-        [self removeStateTimer];
-        [self.activityIndicator stopAnimating];
-    }else{
-        [self.activityIndicator startAnimating];
-    }
-}
-
-- (void)removeStateTimer
-{
-    [self.stateTimer invalidate];
-    self.stateTimer = nil;
-}
-
-
-- (void)quicklyReplayMovie:(NSURL*)fileURL
-{
-    [self.mediaPlayer reset];
-    [self quicklyPlayMovie:fileURL];
-}
-
-
+//***************************************************************************
 #pragma mark - Convention Methods
 -(void)quicklyPlayMovie:(NSURL*)fileURL
 {
@@ -119,7 +82,6 @@
     [player start];
 }
 
-#pragma mark VMediaPlayerDelegate Implement / Optional
 - (void)mediaPlayer:(VMediaPlayer *)player setupPlayerPreference:(id)arg
 {
     [player setBufferSize:512*1024];
@@ -141,27 +103,39 @@
     }
 	return cache;
 }
+- (void)mediaPlayer:(VMediaPlayer *)player setupManagerPreference:(id)arg{
+    
+    player.decodingSchemeHint = VMDecodingSchemeSoftware;
+	player.autoSwitchDecodingScheme = NO;
+}
 
-- (void)mediaPlayer:(VMediaPlayer *)player setupManagerPreference:(id)arg{}
+- (void)mediaPlayer:(VMediaPlayer *)player playbackComplete:(id)arg{
+    
+    [self nextChannelAction:nil];
+}
 
-- (void)mediaPlayer:(VMediaPlayer *)player playbackComplete:(id)arg{}
-
-- (void)mediaPlayer:(VMediaPlayer *)player error:(id)arg{}
+- (void)mediaPlayer:(VMediaPlayer *)player error:(id)arg{
+    
+    [player reset];
+}
 //******************************************************************************
 #pragma mark - 播放器按钮的控制操作
 #pragma make 播放
 - (void)playVideo
 {
-    self.playingVideo = [VideoTool playingVideo];
+    [self addStateTimer];
     
+    [self.mediaPlayer reset];
+    
+    self.playingVideo = [VideoTool playingVideo];
     NSURL *url = [[NSBundle mainBundle] URLForResource:self.playingVideo.name withExtension:nil];
- 
-    [self quicklyReplayMovie:url];
+    
+    [self quicklyPlayMovie:url];
 }
 
 #pragma mark 开始暂停
 - (IBAction)startPauseBtnClick:(UIButton *)sender {
-
+    
     sender.selected = !sender.selected;
 	if ([self.mediaPlayer isPlaying]) {
         [self.mediaPlayer pause];
@@ -170,39 +144,54 @@
 	}
 }
 
-
 #pragma mark 上一台
 - (IBAction)prevChannelAction:(UIButton *)sender {
     
     [self.mediaPlayer reset];
     
-     [VideoTool setPlayingVideo:[VideoTool previousVideo]];
+    [VideoTool setPlayingVideo:[VideoTool previousVideo]];
     
-     [self addStateTimer];
+    [self playVideo];
     
-     [self playVideo];
-
 }
 
 #pragma mark 下一台
 - (IBAction)nextChannelAction:(UIButton *)sender{
-   
-    [self.mediaPlayer reset];
-
-     [VideoTool setPlayingVideo:[VideoTool nextVideo]];
-   
-     [self addStateTimer];
     
-     [self playVideo];
+    [self.mediaPlayer reset];
+    
+    [VideoTool setPlayingVideo:[VideoTool nextVideo]];
+    
+    [self playVideo];
+    
+}
+
+- (IBAction)switchVideo {
+    
+    static emVMVideoFillMode modes[] = {
+		VMVideoFillModeFit,
+		VMVideoFillMode100,
+		VMVideoFillModeCrop,
+		VMVideoFillModeStretch,
+	};
+	static int curModeIdx = 0;
+    
+	curModeIdx = (curModeIdx + 1) % (int)(sizeof(modes)/sizeof(modes[0]));
+	[self.mediaPlayer setVideoFillMode:modes[curModeIdx]];
 
 }
 
 #pragma mark  横竖屏切换
 - (IBAction)fullScreen:(UIButton *)sender{
     
- 
+    [self dismissViewControllerAnimated:NO completion:nil];
+    
+    [self.mediaPlayer reset];
+    
+    [self.mediaPlayer unSetupPlayer];
 }
 
+//***************************************************************************
 // top 和 bottom 部分的控制
 #pragma mark - 时间计时器
 - (void)addTimer
@@ -237,6 +226,29 @@
         self.topView.alpha = 0.0f;
         self.bottomView.alpha = 0.0f;
     }
+}
+//***************************************************************************
+#pragma mark - 播放状态监听器
+- (void)addStateTimer
+{
+    self.stateTimer = [NSTimer timerWithTimeInterval:0.5f target:self selector:@selector(monitorPlayStates) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:self.stateTimer forMode:NSRunLoopCommonModes];
+}
+
+- (void)monitorPlayStates
+{
+    if ([self.mediaPlayer isPlaying]) {
+        [self removeStateTimer];
+        [self.activityIndicator stopAnimating];
+    }else{
+        [self.activityIndicator startAnimating];
+    }
+}
+
+- (void)removeStateTimer
+{
+    [self.stateTimer invalidate];
+    self.stateTimer = nil;
 }
 
 @end

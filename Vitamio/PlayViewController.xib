@@ -54,6 +54,9 @@
                                     <state key="normal" image="zap_chan">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="switchVideo" destination="-1" eventType="touchUpInside" id="Ka2-58-t5Y"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="7SR-G3-12e" userLabel="上一频道">
                                     <rect key="frame" x="78" y="0.0" width="32" height="32"/>

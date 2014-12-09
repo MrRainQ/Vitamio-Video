@@ -22,8 +22,6 @@
 		CBE7D7281A2FF3C600301BAA /* VitamioTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE7D7271A2FF3C600301BAA /* VitamioTests.m */; };
 		CBE7D7381A2FF42300301BAA /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE7D7321A2FF42300301BAA /* ListViewController.m */; };
 		CBE7D7391A2FF42300301BAA /* VideoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE7D7341A2FF42300301BAA /* VideoTool.m */; };
-		CBE7D73A1A2FF42300301BAA /* UIView+RQ.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE7D7361A2FF42300301BAA /* UIView+RQ.m */; };
-		CBE7D73B1A2FF42300301BAA /* videoview_cover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBE7D7371A2FF42300301BAA /* videoview_cover@2x.png */; };
 		CBE7D74D1A2FF44A00301BAA /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CBE7D73D1A2FF44A00301BAA /* MJRefresh.bundle */; };
 		CBE7D74E1A2FF44A00301BAA /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE7D7401A2FF44A00301BAA /* MJRefreshBaseView.m */; };
 		CBE7D74F1A2FF44A00301BAA /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE7D7421A2FF44A00301BAA /* MJRefreshConst.m */; };
@@ -88,9 +86,6 @@
 		CBE7D7321A2FF42300301BAA /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 		CBE7D7331A2FF42300301BAA /* VideoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoTool.h; sourceTree = "<group>"; };
 		CBE7D7341A2FF42300301BAA /* VideoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoTool.m; sourceTree = "<group>"; };
-		CBE7D7351A2FF42300301BAA /* UIView+RQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RQ.h"; sourceTree = "<group>"; };
-		CBE7D7361A2FF42300301BAA /* UIView+RQ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RQ.m"; sourceTree = "<group>"; };
-		CBE7D7371A2FF42300301BAA /* videoview_cover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "videoview_cover@2x.png"; sourceTree = "<group>"; };
 		CBE7D73D1A2FF44A00301BAA /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		CBE7D73E1A2FF44A00301BAA /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
 		CBE7D73F1A2FF44A00301BAA /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
@@ -240,9 +235,6 @@
 				CBE7D7941A30070400301BAA /* PlayViewController.xib */,
 				CBE7D7331A2FF42300301BAA /* VideoTool.h */,
 				CBE7D7341A2FF42300301BAA /* VideoTool.m */,
-				CBE7D7351A2FF42300301BAA /* UIView+RQ.h */,
-				CBE7D7361A2FF42300301BAA /* UIView+RQ.m */,
-				CBE7D7371A2FF42300301BAA /* videoview_cover@2x.png */,
 				CBE7D7141A2FF3C600301BAA /* Images.xcassets */,
 				CBE7D7031A2FF3C600301BAA /* Supporting Files */,
 			);
@@ -415,7 +407,6 @@
 				CBE7D7951A30070400301BAA /* PlayViewController.xib in Resources */,
 				CBE7D7101A2FF3C600301BAA /* Main.storyboard in Resources */,
 				CBE7D74D1A2FF44A00301BAA /* MJRefresh.bundle in Resources */,
-				CBE7D73B1A2FF42300301BAA /* videoview_cover@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,7 +427,6 @@
 			files = (
 				CBE7D74F1A2FF44A00301BAA /* MJRefreshConst.m in Sources */,
 				CBE7D7541A2FF44A00301BAA /* UIView+Extension.m in Sources */,
-				CBE7D73A1A2FF42300301BAA /* UIView+RQ.m in Sources */,
 				CBE7D7501A2FF44A00301BAA /* MJRefreshFooterView.m in Sources */,
 				CBE7D70D1A2FF3C600301BAA /* AppDelegate.m in Sources */,
 				CBE7D7521A2FF44A00301BAA /* UIScrollView+Extension.m in Sources */,

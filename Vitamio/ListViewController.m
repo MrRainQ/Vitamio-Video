@@ -27,7 +27,6 @@
             NSString *bundleName = [NSString stringWithFormat:@"minion_0%d.mp4",i % 5 + 1];
             ChannelModel *chan = [[ChannelModel alloc]init];
             chan.name = bundleName;
-            chan.db_id = i;
             [medias addObject:chan];
         }
         self.medias = medias;
@@ -97,7 +96,6 @@
         NSString *bundleName = [NSString stringWithFormat:@"minion_0%d.mp4",i % 5 + 1];
         ChannelModel *chan = [[ChannelModel alloc]init];
         chan.name = bundleName;
-        chan.db_id = i;
         [self.medias insertObject:chan atIndex:0];
     }
     
@@ -118,7 +116,6 @@
         NSString *bundleName = [NSString stringWithFormat:@"minion_0%d.mp4",i % 5 + 1];
         ChannelModel *chan = [[ChannelModel alloc]init];
         chan.name = bundleName;
-        chan.db_id = i;
         [self.medias addObject:chan];
     }
     
